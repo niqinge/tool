@@ -3,7 +3,7 @@
 #### 使用方式
 - 1.download
 ```text
-    $: cd ~/src/github.com
+    $: cd ~/go/src/github.com
     $: mkdir niqinge
     $: cd niqinge
     $: git clone git@github.com:niqinge/utils.git
