@@ -7,5 +7,8 @@ import (
 
 func TestInitLogger(t *testing.T) {
 	log := InitLogger("test")
-	log.Info("test", zap.String("test", "heihei"))
+	log.Info("Info", zap.String("test", "Info"))
+	log.Warn("Warn", zap.String("test", "Warn"))
+	log.Debug("Debug", zap.String("test", "Debug"))
+	log.Error("Error", zap.String("test", "Error"))
 }
