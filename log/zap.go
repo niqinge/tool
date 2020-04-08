@@ -1,4 +1,4 @@
-package logger
+package log
 
 import (
 	"fmt"
@@ -39,7 +39,7 @@ func getEncoder() zapcore.Encoder {
 func getLogWriter(project string) zapcore.WriteSyncer {
 	logDir := "log"
 	if project != "" {
-		logDir = "log/"+project
+		logDir = "log/" + project
 	}
 	if err := os.MkdirAll(logDir, os.ModePerm); err != nil {
 		panic(err)
@@ -51,4 +51,20 @@ func getLogWriter(project string) zapcore.WriteSyncer {
 
 	//defer close()
 	return consolSyncers
+}
+
+func Warn(msg string, fields ...zap.Field) {
+	Logger.Warn(msg, fields...)
+}
+
+func Error(msg string, fields ...zap.Field) {
+	Logger.Error(msg, fields...)
+}
+
+func Info(msg string, fields ...zap.Field) {
+	Logger.Info(msg, fields...)
+}
+
+func Debug(msg string, fields ...zap.Field) {
+	Logger.Debug(msg, fields...)
 }
