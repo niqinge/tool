@@ -1,0 +1,31 @@
+package email
+
+import (
+	"fmt"
+	"gopkg.in/gomail.v2"
+)
+
+type IEmailHelper interface {
+	Do(option *Option) error
+}
+
+type EmailHelper struct {
+	*Config
+}
+
+func NewEmailHelper(config *Config) *EmailHelper {
+	return &EmailHelper{Config: config}
+}
+
+func (h *EmailHelper) Do(option *Option) error {
+	m := gomail.NewMessage()
+	m.SetHeader("From", fmt.Sprintf("zhangsan<%s>", h.From))
+	m.SetHeader("To", option.To...)
+	m.SetHeader("Cc", option.Cc...)
+	m.SetHeader("Subject", option.Subject)
+	m.SetBody("text/plain", option.Content)
+
+	d := gomail.NewDialer(h.Host, h.Post, h.From, h.Password)
+	return d.DialAndSend(m)
+}
+
