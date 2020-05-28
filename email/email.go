@@ -6,7 +6,7 @@ import (
 )
 
 type IEmailHelper interface {
-	Do(option *Option) error
+	Send(option *Option) error
 }
 
 type EmailHelper struct {
@@ -17,7 +17,7 @@ func NewEmailHelper(config *Config) *EmailHelper {
 	return &EmailHelper{Config: config}
 }
 
-func (h *EmailHelper) Do(option *Option) error {
+func (h *EmailHelper) Send(option *Option) error {
 	m := gomail.NewMessage()
 	m.SetHeader("From", fmt.Sprintf("zhangsan<%s>", h.From))
 	m.SetHeader("To", option.To...)
