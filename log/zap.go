@@ -10,9 +10,9 @@ import (
 
 var Logger *zap.Logger
 
-func InitLogger(project string) *zap.Logger {
+func InitLogger(project, path string) *zap.Logger {
 	// 方法1
-	writeSyncer := getLogWriter(project)
+	writeSyncer := getLogWriter(project, path)
 	encoder := getEncoder()
 	core := zapcore.NewCore(encoder, writeSyncer, zapcore.InfoLevel)
 
@@ -36,8 +36,8 @@ func getEncoder() zapcore.Encoder {
 }
 
 // 所在目录必须预先创建
-func getLogWriter(project string) zapcore.WriteSyncer {
-	logDir := "log"
+func getLogWriter(project, path string) zapcore.WriteSyncer {
+	logDir := path+"/log"
 	if project != "" {
 		logDir = "log/" + project
 	}
