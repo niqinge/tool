@@ -19,7 +19,7 @@ func NewEmailHelper(config *Config) *EmailHelper {
 
 func (h *EmailHelper) Send(option *Option) error {
 	m := gomail.NewMessage()
-	m.SetHeader("From", fmt.Sprintf("zhangsan<%s>", h.From))
+	m.SetHeader("From", fmt.Sprintf("%s<%s>", h.UserName, h.From))
 	m.SetHeader("To", option.To...)
 	m.SetHeader("Cc", option.Cc...)
 	m.SetHeader("Subject", option.Subject)
