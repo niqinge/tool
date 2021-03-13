@@ -7,22 +7,35 @@ import (
 	"time"
 )
 
-func OpenGormConn(conf *DbConfig) *gorm.DB {
-	uri := fmt.Sprintf("%s:%s@tcp(%s:3306)/%s?charset=utf8&parseTime=True&loc=Local", conf.User, conf.PassWord, conf.Url, conf.DbName)
+func OpenGormConn(conf *DbConfig) (*gorm.DB, error) {
+	return openGormConn(conf, false)
+}
 
-	//db, err := gorm.Open("mysql", "root:1234@tcp(127.0.0.1:3306)/account?charset=utf8&parseTime=True&loc=Local")
-	db, err := gorm.Open("mysql", uri)
+func openGormConn(conf *DbConfig, flag bool) (*gorm.DB, error) {
+	db, err := gorm.Open("mysql", conf.genUri(flag))
 	if err != nil {
-		panic(err)
+		return nil, fmt.Errorf("gorm open mysql , err:%s", err)
 	}
-
-	db.DB().SetMaxIdleConns(10)
-	db.DB().SetMaxOpenConns(100)
-	db.DB().SetConnMaxLifetime(time.Hour * 3)
-
-	//defer db.Close()
+	
+	if conf.MaxIdleConns == 0 {
+		db.DB().SetMaxIdleConns(10)
+	} else {
+		db.DB().SetMaxIdleConns(conf.MaxIdleConns)
+	}
+	if conf.MaxOpenConns == 0 {
+		db.DB().SetMaxOpenConns(100)
+	} else {
+		db.DB().SetMaxOpenConns(conf.MaxOpenConns)
+	}
+	if conf.ConnMaxLifetime != 0 {
+		db.DB().SetConnMaxLifetime(time.Hour * 3)
+	} else {
+		db.DB().SetConnMaxLifetime(conf.ConnMaxLifetime)
+	}
+	
+	// defer db.Close()
 	if err := db.DB().Ping(); err != nil {
-		panic(err)
+		return nil, fmt.Errorf("gorm ping mysql , err:%s", err)
 	}
-	return db
+	return db, nil
 }

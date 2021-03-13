@@ -2,6 +2,7 @@ package mysql
 
 import (
 	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 	"testing"
 )
 
@@ -12,9 +13,10 @@ type base struct {
 
 func TestOpenGormConn(t *testing.T) {
 
-	conf := NewDbConfig("mysql")
+	conf := NewLocalDBConf("mysql")
 
-	db := OpenGormConn(conf)
+	db, err := OpenGormConn(conf)
+	require.NoError(t, err)
 	b := &base{Name: "zhangsan"}
 	assert.NoError(t, db.CreateTable(b).Error)
 	assert.NoError(t, db.Create(b).Error)
