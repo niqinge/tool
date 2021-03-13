@@ -32,8 +32,8 @@
 - 数据库迁移
 
 
-#### apollo配置中心
-- 说明: 需要安装[携程开源框架](https://github.com/ctripcorp/apollo)
+#### apollo分布式配置中心客户端
+- 说明: 需要安装携程apollo开源框架[服务端](https://github.com/ctripcorp/apollo) 
 - 客户端链接及取值
 
 #### 发邮件
