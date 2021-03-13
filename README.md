@@ -10,12 +10,12 @@
 ```
 - 2.引包
 ```text
-    $: go mod vendor
+    $: go mod tidy
 ```
 
-#### 功能介绍
+### 功能介绍
 
-- 日志包
+#### 日志包log
 ```text
     说明:日志包使用的是uber开源日志框架, 详细请查看https://github.com/uber-go/zap.
     使用:
@@ -27,7 +27,16 @@
             Error:log.Error("Error", zap.String("test", "Error"))
 ```
 
-- mysql链接
-```text
- 
-```
+#### mysql
+- mysql链接 
+- 数据库迁移
+
+
+#### apollo配置中心
+- 说明: 需要安装[携程开源框架](https://github.com/ctripcorp/apollo)
+- 客户端链接及取值
+
+#### 发邮件
+- 需要配置发送人的账户信息
+
+#### nsq消息队列(TODO)
