@@ -1,4 +1,4 @@
-module github.com/niqinge/utils
+module github.com/niqinge/tool
 
 go 1.18
 

@@ -6,7 +6,7 @@
     $: cd ~/go/src/github.com
     $: mkdir niqinge
     $: cd niqinge
-    $: git clone git@github.com:niqinge/utils.git
+    $: git clone git@github.com:niqinge/tool.git
 ```
 - 2.引包
 ```text
