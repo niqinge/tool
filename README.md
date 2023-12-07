@@ -40,3 +40,14 @@
 - 需要配置发送人的账户信息
 
 #### nsq消息队列(TODO)
+
+#### reflects 反射
+- 反射出结构体的方法，并执行指定方法后，返回其结果值
+
+#### JWT
+- JWT 生成, 解析
+
+#### mycontext
+- 唯一的requestId
+- 基于已有的requestId 生成context
+- 基于已有的context 获取requestId
