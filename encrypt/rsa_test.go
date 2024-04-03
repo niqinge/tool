@@ -26,6 +26,7 @@ func (r *RsaTestSuite) SetupSuite() {
     err := r.encrypt.GenKey(2048)
     r.Require().NoError(err)
     r.text = "zhou ge ge is a big pig"
+    r.T().Logf(r.encrypt.privateKeyStr)
 }
 
 // after test

@@ -16,13 +16,13 @@ func Test_gen(t *testing.T) {
     jt, err := NewJwt(rasEncrypt.GetPrivateKey(), rasEncrypt.GetPublicKey())
     assert.NoError(t, err)
 
-    param := map[string]interface{}{"user_id": time.Now().UnixNano()}
+    param := map[string]interface{}{"user_id": time.Now().String()}
     token, err := jt.Encode(param)
     assert.NoError(t, err)
 
     decodeResult, err := jt.Decode(token)
     assert.NoError(t, err)
     for k, v := range param {
-        decodeResult[k] = v
+        assert.Equal(t, decodeResult[k], v)
     }
 }
