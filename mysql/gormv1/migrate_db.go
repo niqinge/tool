@@ -1,4 +1,4 @@
-package gromv1
+package gormv1
 
 import (
     "errors"
